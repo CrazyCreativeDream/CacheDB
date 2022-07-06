@@ -22,12 +22,16 @@
                             switch (config.type) {
                                 case "json":
                                     resolve(response.json());
+                                    return;
                                 case "arrayBuffer":
                                     resolve(response.arrayBuffer());
+                                    return;
                                 case 'blob':
                                     resolve(response.blob());
+                                    return;
                                 default:
                                     resolve(response.text());
+                                    return;
                             }
                         }).catch(err => { resolve(null); });
                 })
