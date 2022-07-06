@@ -25,7 +25,7 @@ A common front-end/Service Worker-based Key/Value database based on CacheStorage
 You can import this script as:
 
 ```js
-import CacheDB from '@ChenYFan/cache-db' //ServiceWorker
+import CacheDB from '@chenyfan/cache-db' //ServiceWorker
 ```
 
 ```html
