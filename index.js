@@ -21,7 +21,7 @@
                         .then(response => {
                             switch (config.type) {
                                 case "json":
-                                    resolve(JSON.parse(response.body));
+                                    resolve(response.json());
                                 case "arrayBuffer":
                                     resolve(response.arrayBuffer());
                                 case 'blob':
