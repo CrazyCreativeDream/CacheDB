@@ -1,0 +1,15 @@
+{
+  "name": "@chenyfan/cache-db",
+  "version": "0.0.2",
+  "description": "A common front-end/Service Worker-based Key/Value database based on CacheStorage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'Success!'"
+  },
+  "keywords": [
+    "DB",
+    "Cache"
+  ],
+  "author": "ChenYFan",
+  "license": "GPL-3.0-or-later"
+}
