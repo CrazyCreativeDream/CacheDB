@@ -29,5 +29,5 @@ import CacheDB from '@chenyfan/cache-db' //ServiceWorker
 ```
 
 ```html
-<script src="https://unpkg.com/@ChenYFan/cache-db"></script>
+<script src="https://unpkg.com/@chenyfan/cache-db"></script>
 ```
