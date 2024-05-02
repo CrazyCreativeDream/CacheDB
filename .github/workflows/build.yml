@@ -10,7 +10,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v1
         with:
-          node-version: 16.x
+          node-version: 18.x
       - name: Cache node modules
         uses: actions/cache@v1
         with:
@@ -19,6 +19,7 @@ jobs:
       - name: Install & Build
         run: >
           npm i -D
+          
           npm run build
       - uses: JS-DevTools/npm-publish@v1
         with:
