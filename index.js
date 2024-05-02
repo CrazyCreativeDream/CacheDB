@@ -1,15 +1,5 @@
-(function (factory) {
-    if (typeof exports === 'object') {
-        module.exports = factory();
-    } else if (typeof define === 'function' && define.amd) {
-        define(factory);
-    } else if (typeof window === 'object') {
-        window.CacheDB = factory();
-    } else {
-        self.CacheDB = factory();
-    }
+!(() => {
 
-})(function () {
     const ifObjectisJSON = function (obj) {
         return (typeof obj === 'object' && obj !== null && obj.constructor === Object) || Array.isArray(obj)
     }
@@ -181,6 +171,5 @@
             })
         }
     }
-    return CacheDB;
-})
-
+    self.CacheDB = CacheDB;//easy export
+})();
