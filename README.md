@@ -1,6 +1,6 @@
 # Cache-DB
 
-A common Key/Value database working on both DOM/WebWorker with auto type conversion , based on CacheStorage.
+A common Key/Value database working on both DOM/WebWorker with auto type convert, based on CacheStorage.
 
 
 ```md
@@ -48,7 +48,7 @@ import CacheDB from '@chenyfan/cache-db' //WebWorker With Webpack
 ```
 
 ```js
-importScripts('https://unpkg.com/@chenyfan/cache-db') //WebWorker With JSDelivr CDN
+importScripts('https://unpkg.com/@chenyfan/cache-db') //WebWorker With Unpkg CDN
 //or
 importScripts('https://registry.npmmirror.com/@chenyfan/cache-db/latest/files') //WebWorker With NPM Mirror CDN
 ```
