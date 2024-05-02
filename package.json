@@ -1,6 +1,6 @@
 {
   "name": "@chenyfan/cache-db",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A common Key/Value database working on both DOM/WebWorker with auto type conversion , based on CacheStorage.",
   "main": "./dist/index.min.js",
   "type": "module",
@@ -16,7 +16,7 @@
   ],
   "author": "ChenYFan",
   "license": "GPL-3.0-or-later",
-  "dependencies": {
+  "devDependencies": {
     "compression-webpack-plugin": "^11.1.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
