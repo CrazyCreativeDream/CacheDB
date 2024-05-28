@@ -1,5 +1,4 @@
 !(() => {
-
     const ifObjectisJSON = function (obj) {
         return (typeof obj === 'object' && obj !== null && obj.constructor === Object) || Array.isArray(obj)
     }
@@ -10,7 +9,7 @@
         this.prefix = prefix || "CacheDBDefaultPrefix";
         this.read = async function (key, config) {
             config = config || {};
-            config.type = config.type || this.config.auto ? "auto" : "text";
+            config.type = config.type || (this.config.auto ? "auto" : "text");
             return new Promise((resolve, reject) => {
                 caches.open(this.namespace)
                     .then(cache => {
@@ -71,7 +70,7 @@
         }
         this.write = async function (key, value, config) {
             config = config || {};
-            config.type = config.type || this.config.auto ? "auto" : "text";
+            config.type = config.type || (this.config.auto ? "auto" : "text");
             if (config.type === 'auto')
                 config.type = ifObjectisJSON(value) ? 'json' : typeof value;
             switch (config.type) {
