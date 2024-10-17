@@ -7,9 +7,30 @@
         this.config.auto = this.config.auto || 0
         this.namespace = namespace || "CacheDBDefaultNameSpace";
         this.prefix = prefix || "CacheDBDefaultPrefix";
+
+        this.has = async function (key) {
+            return new Promise((resolve, reject) => {
+                caches.open(this.namespace).then(cache => {
+                    cache.match(new Request(`https://${this.prefix}/${encodeURIComponent(key)}`))
+                        .then(response => resolve(response ? true : false))
+                }).catch(err => {
+                    console.error('CacheDB Has Erorr:' + err);
+                    reject(false)
+                });
+            })
+        }
         this.read = async function (key, config) {
             config = config || {};
             config.type = config.type || (this.config.auto ? "auto" : "text");
+            if (!await this.has(key)) {
+                if (config.default) {
+                    await this.write(key,config.default, config);
+                    return config.default;
+                } else {
+                    console.error('CacheDB Read Erorr: Key not found');
+                    return null;
+                }
+            }
             return new Promise((resolve, reject) => {
                 caches.open(this.namespace)
                     .then(cache => {
@@ -68,6 +89,8 @@
                     });
             })
         }
+
+
         this.write = async function (key, value, config) {
             config = config || {};
             config.type = config.type || (this.config.auto ? "auto" : "text");
@@ -108,6 +131,7 @@
                 });
             })
         }
+
         this.delete = async function (key) {
             return new Promise((resolve, reject) => {
                 caches.open(this.namespace).then(cache => {
@@ -120,6 +144,7 @@
                     });
             })
         }
+
         this.list = async function () {
             return new Promise((resolve, reject) => {
                 caches.open(this.namespace).then(cache => {
@@ -132,6 +157,7 @@
                 });
             })
         }
+
         this.all = async function () {
             const data = {};
             return new Promise(async (resolve, reject) => {
@@ -146,6 +172,7 @@
                 });
             })
         }
+
         this.clear = async function () {
             return new Promise((resolve, reject) => {
                 this.list().then(keys => {
@@ -159,6 +186,7 @@
                 });
             })
         }
+
         this.destroy = async function () {
             return new Promise((resolve, reject) => {
                 this.clear().then(() => {

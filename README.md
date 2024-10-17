@@ -39,12 +39,21 @@ A common Key/Value database working on both DOM/WebWorker with auto type convert
 
 < await DBWithAuto.read("key1") //Auto-Convert worked in both reading and writing.
 > {123: 789}
+
+< await DBWithAuto.has("key1") //After V1.1.5, CacheDB has a new method to check if the key exists.
+> true
+
+< await DBWithAuto.read("key3",{default:"default value"}) //After V1.1.5, CacheDB can read with default value when the key does not exist.
+> "default value"
+
+< await DBWithAuto.read("key3",{default:"diff value"}) //Default value could only overwrite when the key does not exist.
+> "default value"
 ```
 
 You can import this script as:
 
 ```js
-import CacheDB from '@chenyfan/cache-db' //WebWorker With Webpack
+import '@chenyfan/cache-db' //WebWorker With Webpack
 ```
 
 ```js
