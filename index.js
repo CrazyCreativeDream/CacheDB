@@ -14,20 +14,20 @@
                     cache.match(new Request(`https://${this.prefix}/${encodeURIComponent(key)}`))
                         .then(response => resolve(response ? true : false))
                 }).catch(err => {
-                    console.error('CacheDB Has Erorr:' + err);
+                    console.error(`CacheDB Has Erorr: Key "${key}" ${err}`);
                     reject(false)
                 });
             })
         }
         this.read = async function (key, config) {
             config = config || {};
-            config.type = config.type || (this.config.auto ? "auto" : "text");
+            config.type = (config.type || (this.config.auto ? "auto" : "text")).toLowerCase();
             if (!await this.has(key)) {
-                if (config.default) {
-                    await this.write(key,config.default, config);
+                if (typeof config.default !== 'undefined') {
+                    await this.write(key, config.default, config);
                     return config.default;
                 } else {
-                    console.error('CacheDB Read Erorr: Key not found');
+                    console.error(`CacheDB Read Erorr: Key "${key}" not found and no default value provided.`);
                     return null;
                 }
             }
@@ -75,7 +75,7 @@
                                         resolve(response.text());
                                         return;
                                     case 'boolean':
-                                        resolve(await response.text() == 1);
+                                        resolve(await response.text() === "1");
                                         return;
                                     default:
                                         resolve(response.body);
@@ -84,7 +84,7 @@
                             })
                     })
                     .catch(err => {
-                        console.error('CacheDB Read Erorr:' + err);
+                        console.error(`CacheDB Read Erorr: Key "${key}" ${err}`);
                         reject(null);
                     });
             })
@@ -93,7 +93,7 @@
 
         this.write = async function (key, value, config) {
             config = config || {};
-            config.type = config.type || (this.config.auto ? "auto" : "text");
+            config.type = (config.type || (this.config.auto ? "auto" : "text")).toLowerCase();
             if (config.type === 'auto')
                 config.type = ifObjectisJSON(value) ? 'json' : typeof value;
             switch (config.type) {
@@ -126,7 +126,7 @@
                             headers: { 'Content-Type': config.content_type }
                         })).then(resolve(1))
                 }).catch(err => {
-                    console.error('CacheDB Write Erorr:' + err);
+                    console.error(`CacheDB Write Erorr: Key "${key}" ${err}`);
                     reject(0)
                 });
             })
@@ -139,7 +139,7 @@
                         .then(resolve(true))
                 })
                     .catch(err => {
-                        console.error('CacheDB Delete Erorr:' + err);
+                        console.error(`CacheDB Delete Erorr: Key "${key}" ${err}`);
                         reject(false)
                     });
             })
@@ -152,7 +152,7 @@
                         resolve(keys.map(key => decodeURIComponent(key.url.split('/').pop())));
                     })
                 }).catch(err => {
-                    console.error('CacheDB List Erorr:' + err);
+                    console.error(`CacheDB List Erorr: ${err}`);
                     reject([])
                 });
             })
@@ -167,7 +167,7 @@
                     }))
                     resolve(data);
                 }).catch(err => {
-                    console.error('CacheDB All Erorr:' + err);
+                    console.error(`CacheDB All Erorr: ${err}`);
                     reject([])
                 });
             })
@@ -181,7 +181,7 @@
                     })
                     resolve(true);
                 }).catch(err => {
-                    console.error('CacheDB Clear Erorr:' + err);
+                    console.error(`CacheDB Clear Erorr: ${err}`);
                     reject(false)
                 });
             })
@@ -192,7 +192,7 @@
                 this.clear().then(() => {
                     caches.delete(this.namespace).then(resolve(true));
                 }).catch(err => {
-                    console.error('CacheDB Destroy Erorr:' + err);
+                    console.error(`CacheDB Destroy Erorr: ${err}`);
                     reject(false)
                 });
             })
