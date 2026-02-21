@@ -1,14 +1,17 @@
 name: BundleCI
 on:
   - push
+permissions:
+  id-token: write 
+  contents: read
 jobs:
   buildstatic:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: 24.x
       - name: Cache node modules
@@ -21,7 +24,7 @@ jobs:
           npm i -D
           
           npm run build
-      - uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPM }}
-          package: ./package.json
+
+      - name: Publish
+        run: >
+          npm publish

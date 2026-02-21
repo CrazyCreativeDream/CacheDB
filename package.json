@@ -1,5 +1,5 @@
 {
-  "name": "@chenyfan\/cache-db",
+  "name": "@chenyfan/cache-db",
   "version": "1.1.6",
   "description": "A common Key/Value database working on both DOM/WebWorker with auto type convert, based on CacheStorage.",
   "main": "./dist/index.min.js",

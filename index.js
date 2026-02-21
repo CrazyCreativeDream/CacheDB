@@ -14,7 +14,7 @@
                     cache.match(new Request(`https://${this.prefix}/${encodeURIComponent(key)}`))
                         .then(response => resolve(response ? true : false))
                 }).catch(err => {
-                    console.error(`CacheDB Has Erorr: Key "${key}" ${err}`);
+                    console.error(`CacheDB Has Error: Key "${key}" ${err}`);
                     reject(false)
                 });
             })
@@ -27,7 +27,7 @@
                     await this.write(key, config.default, config);
                     return config.default;
                 } else {
-                    console.error(`CacheDB Read Erorr: Key "${key}" not found and no default value provided.`);
+                    console.error(`CacheDB Read Error: Key "${key}" not found and no default value provided.`);
                     return null;
                 }
             }
@@ -84,7 +84,7 @@
                             })
                     })
                     .catch(err => {
-                        console.error(`CacheDB Read Erorr: Key "${key}" ${err}`);
+                        console.error(`CacheDB Read Error: Key "${key}" ${err}`);
                         reject(null);
                     });
             })
@@ -126,7 +126,7 @@
                             headers: { 'Content-Type': config.content_type }
                         })).then(resolve(1))
                 }).catch(err => {
-                    console.error(`CacheDB Write Erorr: Key "${key}" ${err}`);
+                    console.error(`CacheDB Write Error: Key "${key}" ${err}`);
                     reject(0)
                 });
             })
@@ -139,7 +139,7 @@
                         .then(resolve(true))
                 })
                     .catch(err => {
-                        console.error(`CacheDB Delete Erorr: Key "${key}" ${err}`);
+                        console.error(`CacheDB Delete Error: Key "${key}" ${err}`);
                         reject(false)
                     });
             })
@@ -152,7 +152,7 @@
                         resolve(keys.map(key => decodeURIComponent(key.url.split('/').pop())));
                     })
                 }).catch(err => {
-                    console.error(`CacheDB List Erorr: ${err}`);
+                    console.error(`CacheDB List Error: ${err}`);
                     reject([])
                 });
             })
@@ -167,7 +167,7 @@
                     }))
                     resolve(data);
                 }).catch(err => {
-                    console.error(`CacheDB All Erorr: ${err}`);
+                    console.error(`CacheDB All Error: ${err}`);
                     reject([])
                 });
             })
@@ -181,7 +181,7 @@
                     })
                     resolve(true);
                 }).catch(err => {
-                    console.error(`CacheDB Clear Erorr: ${err}`);
+                    console.error(`CacheDB Clear Error: ${err}`);
                     reject(false)
                 });
             })
@@ -192,7 +192,7 @@
                 this.clear().then(() => {
                     caches.delete(this.namespace).then(resolve(true));
                 }).catch(err => {
-                    console.error(`CacheDB Destroy Erorr: ${err}`);
+                    console.error(`CacheDB Destroy Error: ${err}`);
                     reject(false)
                 });
             })
