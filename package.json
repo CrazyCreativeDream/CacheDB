@@ -20,5 +20,8 @@
     "compression-webpack-plugin": "^11.1.0",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"
+  },
+  "repository": {
+    "url": "https://github.com/CrazyCreativeDream/CacheDB"
   }
 }
